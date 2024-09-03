@@ -37,15 +37,11 @@ def add_post(request):
         return render(request, template_name='blog/add_post.html', context=context)
 
     if request.method == "POST":
-        form = PostForm(data=request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            post = Post()
-            post.author = form.cleaned_data['author']
-            post.title = form.cleaned_data['title']
-            post.text = form.cleaned_data['text']
-            post.save()
+            form.save()
 
-            return index(request)
+        return index(request)
 
 
 def post_list(request):
