@@ -25,11 +25,14 @@ urlpatterns = [
     path('', root),
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
+    path('users/', include('users.urls')),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+handler404 = 'blog.views.page_not_found'
+handler500 = 'blog.views.server_error'
 
 
 
